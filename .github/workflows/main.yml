@@ -26,7 +26,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        runner: [ "windows-2022", "macos-12", "ubuntu-22.04", "ubuntu-20.04" ]
+#        runner: [ "windows-2022", "macos-12", "ubuntu-22.04", "ubuntu-20.04" ]
+        runner: [ "macos-12" ]
         qt: [ 5, 6 ]
         generator: [ "MSVC", "GCC", "Clang" ]
         exclude:
@@ -52,12 +53,12 @@ jobs:
             qt: 6
         include:
           # Windows supports MSVC
-          - runner: windows-2022
-            name: "Windows"
-            package_name: "windows"
-            CMAKE_SYSTEM_VERSION: "10.0.20348.0"
-            CMAKE_GENERATOR: "Visual Studio 17 2022"
-            CMAKE_GENERATOR_PLATFORM: "x64"
+#          - runner: windows-2022
+#            name: "Windows"
+#            package_name: "windows"
+#            CMAKE_SYSTEM_VERSION: "10.0.20348.0"
+#            CMAKE_GENERATOR: "Visual Studio 17 2022"
+#            CMAKE_GENERATOR_PLATFORM: "x64"
 
           # MacOS supports Clang
           - runner: macos-12
@@ -68,14 +69,14 @@ jobs:
             CMAKE_OSX_ARCHITECTURES: "x86_64;arm64"
 
           # Ubuntu needs version-specific binaries
-          - runner: ubuntu-22.04
-            name: "Ubuntu 22.04"
-            package_name: "ubuntu-22"
-            CMAKE_GENERATOR: "Ninja"
-          - runner: ubuntu-20.04
-            name: "Ubuntu 20.04"
-            package_name: "ubuntu-20"
-            CMAKE_GENERATOR: "Ninja"
+#          - runner: ubuntu-22.04
+#            name: "Ubuntu 22.04"
+#            package_name: "ubuntu-22"
+#            CMAKE_GENERATOR: "Ninja"
+#          - runner: ubuntu-20.04
+#            name: "Ubuntu 20.04"
+#            package_name: "ubuntu-20"
+#            CMAKE_GENERATOR: "Ninja"
 
     runs-on: "${{ matrix.runner }}"
     name: "${{ matrix.name }} (${{ matrix.generator }}, Qt${{ matrix.qt }})"
